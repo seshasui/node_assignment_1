@@ -1,8 +1,21 @@
 const http = require('http');
-const requestHandler = require('./routes');
+// const requestHandler = require('./routes');
+const express = require('express');
+const app = express();
 
-const server = http.createServer(requestHandler);
+app.use('/users', (req, res, next) => {
+    res.send('<ul><li>User 1</li><li>User 2</li></ul>');
+});
 
-server.listen(3000);
+app.use('/', (req, res, next) => {
+    res.send('<h1>First Express Assignment</h1>');
+    //console.log('initial middleware');
+    //next();
+});
 
-console.log('Listening to server on 3000');
+/* app.use('/', (req, res, next) => {
+    console.log('second middleware');
+    res.send('Welcome to Express Assignment');
+}); */
+
+app.listen(3000);
